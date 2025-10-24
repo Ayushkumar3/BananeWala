@@ -61,7 +61,7 @@
       text-align: center;
     }
 
-    /* Logo & Title (optional) */
+    /* Logo & Title */
     .logo-title {
       display: flex;
       justify-content: center;
@@ -193,33 +193,29 @@
       margin-top: 40px;
     }
 
-    /* Floating Call Now Button (Sticky + Always Visible) */
+    /* Floating Call Now Button (Static on All Devices) */
     .call-now {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #16a34a;
-      color: white;
-      padding: 14px 22px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1em;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      animation: blink 1.2s infinite;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @keyframes blink {
-      0%, 100% { background-color: #16a34a; transform: scale(1); }
-      50% { background-color: #22c55e; transform: scale(1.05); }
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 22px;
+        background-color: #16a34a;
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1em;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transform: translate3d(0,0,0);  /* Prevents jump on mobile */
+        animation: none;               /* Remove blink animation */
     }
 
     .call-now:hover {
-      background-color: #15803d;
+        background-color: #15803d;
     }
 
     /* Mobile Responsiveness */
@@ -276,11 +272,12 @@
       }
 
       .call-now {
+        bottom: 20px;   /* keep static on mobile */
+        right: 15px;
         padding: 12px 18px;
         font-size: 1em;
-        bottom: 15px;
-        right: 15px;
-      }
+        transform: translate3d(0,0,0); /* fix mobile jump */
+    }
     }
   </style>
 </head>

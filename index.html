@@ -45,23 +45,120 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* Banner */
-    .banner {
+    /* ---------- CAROUSEL ---------- */
+    .carousel {
+      position: relative;
       width: 100%;
-      height: 500px;
-      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 60vh;              /* responsive hero-like height */
+      min-height: 260px;
+      max-height: 700px;
+      overflow: hidden;
+      background: #eef6ff;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s ease-in-out;
+      will-change: transform;
+    }
+
+    /* Use background-image on the slide divs (more robust) */
+    .carousel-slide {
+      flex: 0 0 100%;
+      height: 100%;
+      position: relative;
+      display: block;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;    /* fill slide area (full length) */
+      background-color: #eef6ff;
+    }
+
+    /* overlay text */
+    .carousel-caption {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+      font-size: 2.2em;
+      font-weight: 700;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      text-align: center;
+      width: 90%;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* arrows */
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      border: none;
+      color: white;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 2.2em;
-      font-weight: 700;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      padding: 0 15px;
-      text-align: center;
+      cursor: pointer;
+      z-index: 6;
+      transition: background 0.2s;
     }
 
-    /* Logo & Title */
+    .carousel-button:hover { background: rgba(0,0,0,0.6); }
+    .carousel-button:focus { outline: 2px solid rgba(255,255,255,0.6); }
+    .carousel-button.prev { left: 18px; }
+    .carousel-button.next { right: 18px; }
+
+    .chev {
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 8px;
+    }
+    .chev-left { transform: rotate(135deg); }
+    .chev-right { transform: rotate(-45deg); }
+
+    /* dots */
+    .carousel-dots {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14px;
+      display: flex;
+      gap: 8px;
+      z-index: 6;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.15);
+      transition: transform 0.18s, background 0.18s;
+    }
+
+    .dot.active {
+      background: white;
+      transform: scale(1.18);
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 768px) {
+      .carousel { height: 45vh; }
+      .carousel-caption { font-size: 1.4em; padding: 0 10px; color: #fff; }
+      .carousel-button { width: 38px; height: 38px; }
+    }
+
+    /* ---------- REST of your page styles (unchanged) ---------- */
     .logo-title {
       display: flex;
       justify-content: center;
@@ -70,26 +167,12 @@
       gap: 10px;
     }
 
-    .logo-title img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+    .logo-title img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
 
-    h1 {
-      margin: 10px 0 0 0;
-      font-size: 2em;
-      color: #7558ea;
-    }
+    h1 { margin: 10px 0 0 0; font-size: 2em; color: #7558ea; }
 
-    section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
 
-    /* Services Section */
     .services {
       background-color: #f8fafc;
       border-radius: 12px;
@@ -98,11 +181,7 @@
       padding: 40px 20px;
     }
 
-    .services h2 {
-      font-size: 2em;
-      color: #1e3a8a;
-      margin-bottom: 30px;
-    }
+    .services h2 { font-size: 2em; color: #1e3a8a; margin-bottom: 30px; }
 
     .service {
       display: flex;
@@ -117,167 +196,57 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .service:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-    }
+    .service:hover { transform: translateY(-5px); box-shadow: 0 6px 14px rgba(0,0,0,0.1); }
+    .service:nth-child(even) { flex-direction: row-reverse; }
 
-    .service:nth-child(even) {
-      flex-direction: row-reverse;
-    }
+    .service img { width: 45%; border-radius: 12px; object-fit: cover; min-height: 280px; }
 
-    .service img {
-      width: 45%;
-      border-radius: 12px;
-      object-fit: cover;
-      min-height: 280px;
-    }
+    .service-content { width: 50%; text-align: left; }
 
-    .service-content {
-      width: 50%;
-      text-align: left;
-    }
+    .service-content h3 { color: #1e3a8a; font-size: 1.6em; margin-bottom: 10px; }
+    .service-content p { color: #374151; font-size: 1em; margin-bottom: 15px; line-height: 1.6; }
 
-    .service-content h3 {
-      color: #1e3a8a;
-      font-size: 1.6em;
-      margin-bottom: 10px;
-    }
+    .service-points { list-style: none; padding: 0; margin: 0; }
+    .service-points li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; color: #1f2937; }
+    .service-points li::before { content: "🔧"; }
 
-    .service-content p {
-      color: #374151;
-      font-size: 1em;
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
+    .about { margin-top: 50px; }
+    .about h2 { color: #1e3a8a; margin-bottom: 20px; }
+    .about p { color: #374151; max-width: 700px; margin: auto; line-height: 1.6; }
 
-    .service-points {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+    footer { background-color: #1e3a8a; color: white; padding: 15px; margin-top: 40px; }
 
-    .service-points li {
-      margin-bottom: 10px;
+    .call-now {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: #1f2937;
-    }
-
-    .service-points li::before {
-      content: "🔧";
-    }
-
-    /* About Section */
-    .about {
-      margin-top: 50px;
-    }
-
-    .about h2 {
-      color: #1e3a8a;
-      margin-bottom: 20px;
-    }
-
-    .about p {
-      color: #374151;
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.6;
-    }
-
-    footer {
-      background-color: #1e3a8a;
+      justify-content: center;
+      padding: 14px 22px;
+      background-color: #16a34a;
       color: white;
-      padding: 15px;
-      margin-top: 40px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1em;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+    .call-now:hover { background-color: #15803d; }
 
-    /* Floating Call Now Button (Static on All Devices) */
-    .call-now {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 14px 22px;
-        background-color: #16a34a;
-        color: white;
-        border-radius: 50px;
-        font-weight: 600;
-        font-size: 1.1em;
-        text-decoration: none;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        transform: translate3d(0,0,0);  /* Prevents jump on mobile */
-        animation: none;               /* Remove blink animation */
-    }
-
-    .call-now:hover {
-        background-color: #15803d;
-    }
-
-    /* Mobile Responsiveness */
     @media (max-width: 768px) {
-      body {
-        font-size: 0.95em;
-      }
-
-      .service {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .service:nth-child(even) {
-        flex-direction: column;
-      }
-
-      .service img {
-        width: 100%;
-        min-height: 200px;
-      }
-
-      .service-content {
-        width: 100%;
-        text-align: center;
-      }
-
-      .service-content h3 {
-        font-size: 1.3em;
-      }
-
-      .service-content p {
-        font-size: 0.95em;
-      }
-
-      .service-points {
-        text-align: left;
-        display: inline-block;
-      }
-
-      .banner {
-        height: 250px;
-        font-size: 1.4em;
-        padding: 10px;
-      }
-
-      .logo-title img {
-        width: 45px;
-        height: 45px;
-      }
-
-      h1 {
-        font-size: 1.6em;
-      }
-
-      .call-now {
-        bottom: 20px;   /* keep static on mobile */
-        right: 15px;
-        padding: 12px 18px;
-        font-size: 1em;
-        transform: translate3d(0,0,0); /* fix mobile jump */
-    }
+      body { font-size: 0.95em; }
+      .service { flex-direction: column; text-align: center; }
+      .service:nth-child(even) { flex-direction: column; }
+      .service img { width: 100%; min-height: 200px; }
+      .service-content { width: 100%; text-align: center; }
+      .service-content h3 { font-size: 1.3em; }
+      .service-content p { font-size: 0.95em; }
+      .service-points { text-align: left; display: inline-block; }
+      .logo-title img { width: 45px; height: 45px; }
+      h1 { font-size: 1.6em; }
+      .call-now { bottom: 20px; right: 15px; padding: 12px 18px; font-size: 1em; }
     }
   </style>
 </head>
@@ -292,16 +261,39 @@
     </div>
   </header>
 
-  <!-- Banner -->
-  <div class="banner">
-    Reliable. Skilled. Affordable. — Banane Waala
+  <!-- ---------- CAROUSEL Banner (background-image slides) ---------- -->
+  <div class="carousel" id="carousel" aria-roledescription="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- Real plumbing/electric related images from Pexels/Unsplash (reliable) -->
+      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="img" aria-label="Plumber fixing pipe"></div>
+
+      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/4792479/pexels-photo-4792479.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="img" aria-label="Electrician wiring work"></div>
+
+      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/8090152/pexels-photo-8090152.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="img" aria-label="Technician repairing sink"></div>
+      <!-- NOTE: a clone will be appended by JS for smooth wrap -->
+    </div>
+
+    <div class="carousel-caption">Reliable. Skilled. Affordable. — Banane Waala</div>
+
+    <button class="carousel-button prev" id="btnPrev" aria-label="Previous slide">
+      <i class="chev chev-left"></i>
+    </button>
+    <button class="carousel-button next" id="btnNext" aria-label="Next slide">
+      <i class="chev chev-right"></i>
+    </button>
+
+    <div class="carousel-dots" id="carouselDots">
+      <div class="dot active" data-index="0" aria-label="Slide 1"></div>
+      <div class="dot" data-index="1" aria-label="Slide 2"></div>
+      <div class="dot" data-index="2" aria-label="Slide 3"></div>
+    </div>
   </div>
+  <!-- ---------- END CAROUSEL ---------- -->
 
   <!-- Services -->
   <section class="services">
     <h2>Our Services</h2>
 
-    <!-- Service 1 -->
     <div class="service">
       <img src="https://img.freepik.com/free-photo/plumbing-professional-doing-his-job_23-2150721533.jpg?semt=ais_hybrid&w=740&q=80" alt="Plumbing Service">
       <div class="service-content">
@@ -317,7 +309,6 @@
       </div>
     </div>
 
-    <!-- Service 2 -->
     <div class="service">
       <img src="https://img.freepik.com/free-photo/male-electrician-works-switchboard-with-electrical-connecting-cable_169016-15090.jpg?semt=ais_hybrid&w=740&q=80" alt="Electrical Service">
       <div class="service-content">
@@ -351,5 +342,162 @@
   <!-- Floating Call Button -->
   <a href="tel:+917004079237" class="call-now">📞 Call Now</a>
 
+  <!-- Carousel Script -->
+  <script>
+    (function() {
+      const track = document.getElementById('carouselTrack');
+      let slides = Array.from(track.children); // original slides
+      const prevBtn = document.getElementById('btnPrev');
+      const nextBtn = document.getElementById('btnNext');
+      const dotsContainer = document.getElementById('carouselDots');
+      const dots = Array.from(dotsContainer.children);
+      const carousel = document.getElementById('carousel');
+
+      const intervalTime = 5000;
+      let timer = null;
+
+      // clone first slide and append for smooth forward wrap
+      const firstClone = slides[0].cloneNode(true);
+      firstClone.setAttribute('data-clone', 'true');
+      track.appendChild(firstClone);
+
+      // refresh slides list and counts
+      slides = Array.from(track.children); // now includes clone at the end
+      const originalCount = slides.length - 1; // original slides count
+      let current = 0; // 0..originalCount-1
+
+      // helper: set transform by index in slides array (0..originalCount for clone)
+      function setTranslateByIndex(index, withTransition = true) {
+        if (!withTransition) track.style.transition = 'none';
+        else track.style.transition = 'transform 0.7s ease-in-out';
+        track.style.transform = 'translateX(' + (-index * 100) + '%)';
+        // force reflow if transition removed so subsequent code works
+        if (!withTransition) track.offsetHeight;
+      }
+
+      function goTo(index) {
+        // desired index in original cycle
+        // when navigating forward to index 0 from last, we'll move to the clone index (originalCount), then handle transitionend to jump to 0.
+        if (index < 0) {
+          // simple handling: go to last original directly (no backward infinite loop implemented)
+          current = originalCount - 1;
+          setTranslateByIndex(current);
+          updateActive();
+          return;
+        }
+
+        if (index === 0 && current === originalCount - 1) {
+          // normal forward step from last original -> move to clone
+          current = originalCount; // index of clone
+          setTranslateByIndex(current, true); // animate to clone
+          // update dots will still show last dot during animation
+          updateActive(); // will clamp dot to last
+          return;
+        }
+
+        // normal forward/back within originals
+        current = (index + originalCount) % originalCount;
+        setTranslateByIndex(current, true);
+        updateActive();
+      }
+
+      // update dots and aria-hidden
+      function updateActive() {
+        // set aria-hidden on original slides only (exclude clone)
+        slides.forEach((s, i) => {
+          if (i >= originalCount) {
+            s.setAttribute('aria-hidden', 'true');
+          } else {
+            s.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+          }
+        });
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === (current % originalCount)));
+      }
+
+      // transitionend: if we landed on the clone, jump to real first without animation
+      track.addEventListener('transitionend', function() {
+        // if we are on the clone (index === originalCount)
+        // note: compute currentTranslate index from transform
+        const transform = window.getComputedStyle(track).transform;
+        // transform format: matrix(...) we can calculate index from transform or track children - easier: check if current equals originalCount
+        if (current === originalCount) {
+          // jump to real first slide instantly (no transition)
+          setTranslateByIndex(0, false); // no animation
+          current = 0;
+          updateActive();
+          // restore transition for future moves
+          track.style.transition = 'transform 0.7s ease-in-out';
+        }
+      });
+
+      function next() {
+        // if currently at clone (shouldn't happen), normalize
+        if (current >= originalCount) { current = 0; setTranslateByIndex(0, false); }
+        // go to next index (may be clone)
+        if (current === originalCount - 1) {
+          goTo(0); // special handling inside goTo will animate to clone then jump
+        } else {
+          goTo(current + 1);
+        }
+      }
+
+      function prev() {
+        // basic prev: when at first slide, jump to last (no infinite smooth backward implemented)
+        if (current === 0) {
+          current = originalCount - 1;
+          setTranslateByIndex(current, true);
+          updateActive();
+        } else {
+          goTo(current - 1);
+        }
+      }
+
+      // dots click
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          const idx = parseInt(this.getAttribute('data-index'), 10);
+          // move directly to that original index
+          current = idx;
+          setTranslateByIndex(current, true);
+          updateActive();
+          resetTimer();
+        });
+      });
+
+      prevBtn.addEventListener('click', function() { prev(); resetTimer(); });
+      nextBtn.addEventListener('click', function() { next(); resetTimer(); });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') { prev(); resetTimer(); }
+        if (e.key === 'ArrowRight') { next(); resetTimer(); }
+      });
+
+      function startTimer() {
+        timer = setInterval(() => { next(); }, intervalTime);
+      }
+      function stopTimer() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+      function resetTimer() {
+        stopTimer();
+        startTimer();
+      }
+
+      // pause on hover / focus
+      carousel.addEventListener('mouseenter', stopTimer);
+      carousel.addEventListener('mouseleave', startTimer);
+      carousel.addEventListener('focusin', stopTimer);
+      carousel.addEventListener('focusout', startTimer);
+
+      // initialize position at 0 (first slide)
+      setTranslateByIndex(0, false);
+      updateActive();
+      startTimer();
+
+      // keep visual correct on resize
+      window.addEventListener('resize', () => { setTranslateByIndex(current, false); });
+    })();
+  </script>
 </body>
 </html>

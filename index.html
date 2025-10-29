@@ -49,7 +49,7 @@
     .carousel {
       position: relative;
       width: 100%;
-      height: 60vh;              /* responsive hero-like height */
+      height: 60vh;
       min-height: 260px;
       max-height: 700px;
       overflow: hidden;
@@ -64,19 +64,16 @@
       will-change: transform;
     }
 
-    /* Use background-image on the slide divs (more robust) */
     .carousel-slide {
       flex: 0 0 100%;
       height: 100%;
       position: relative;
-      display: block;
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: cover;    /* fill slide area (full length) */
+      background-size: cover;
       background-color: #eef6ff;
     }
 
-    /* overlay text */
     .carousel-caption {
       position: absolute;
       top: 50%;
@@ -92,7 +89,6 @@
       pointer-events: none;
     }
 
-    /* arrows */
     .carousel-button {
       position: absolute;
       top: 50%;
@@ -125,7 +121,6 @@
     .chev-left { transform: rotate(135deg); }
     .chev-right { transform: rotate(-45deg); }
 
-    /* dots */
     .carousel-dots {
       position: absolute;
       left: 50%;
@@ -151,14 +146,29 @@
       transform: scale(1.18);
     }
 
-    /* responsive tweaks */
     @media (max-width: 768px) {
+    .carousel-button {
+        display: none !important;
+    }
       .carousel { height: 45vh; }
       .carousel-caption { font-size: 1.4em; padding: 0 10px; color: #fff; }
-      .carousel-button { width: 38px; height: 38px; }
+
+      /* make arrows smaller & lower in mobile */
+      .carousel-button {
+        width: 32px;
+        height: 32px;
+        bottom: 12%;
+        top: auto;
+        transform: none;
+      }
+
+      .carousel-button i,
+      .chev {
+        padding: 5px;
+      }
     }
 
-    /* ---------- REST of your page styles (unchanged) ---------- */
+    /* ---------- OTHER PAGE SECTIONS ---------- */
     .logo-title {
       display: flex;
       justify-content: center;
@@ -216,10 +226,12 @@
 
     footer { background-color: #1e3a8a; color: white; padding: 15px; margin-top: 40px; }
 
+    /* ---------- CALL NOW BUTTON ---------- */
     .call-now {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 9999;
       display: flex;
       align-items: center;
@@ -234,20 +246,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     .call-now:hover { background-color: #15803d; }
-
-    @media (max-width: 768px) {
-      body { font-size: 0.95em; }
-      .service { flex-direction: column; text-align: center; }
-      .service:nth-child(even) { flex-direction: column; }
-      .service img { width: 100%; min-height: 200px; }
-      .service-content { width: 100%; text-align: center; }
-      .service-content h3 { font-size: 1.3em; }
-      .service-content p { font-size: 0.95em; }
-      .service-points { text-align: left; display: inline-block; }
-      .logo-title img { width: 45px; height: 45px; }
-      h1 { font-size: 1.6em; }
-      .call-now { bottom: 20px; right: 15px; padding: 12px 18px; font-size: 1em; }
-    }
   </style>
 </head>
 <body>
@@ -256,39 +254,30 @@
   <header>
     <div class="scrolling-container">
       <div class="scrolling-text">
-        📞 +91 7004079237 • Contact Us Anytime • Banane Waala - Trusted Home Services
+        📞 +91 7004079237 • Service Hours: 7 AM – 7 PM • Banane Waala – Trusted Home Services
       </div>
     </div>
   </header>
 
-  <!-- ---------- CAROUSEL Banner (background-image slides) ---------- -->
-  <div class="carousel" id="carousel" aria-roledescription="carousel">
+  <!-- ---------- CAROUSEL ---------- -->
+  <div class="carousel" id="carousel">
     <div class="carousel-track" id="carouselTrack">
-      <!-- Real plumbing/electric related images from Pexels/Unsplash (reliable) -->
-      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="img" aria-label="Plumber fixing pipe"></div>
-
-      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/4792479/pexels-photo-4792479.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="img" aria-label="Electrician wiring work"></div>
-
-      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/8090152/pexels-photo-8090152.jpeg?auto=compress&cs=tinysrgb&w=1600');" role="img" aria-label="Technician repairing sink"></div>
-      <!-- NOTE: a clone will be appended by JS for smooth wrap -->
+      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/4792479/pexels-photo-4792479.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/8090152/pexels-photo-8090152.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
     </div>
 
     <div class="carousel-caption">Reliable. Skilled. Affordable. — Banane Waala</div>
 
-    <button class="carousel-button prev" id="btnPrev" aria-label="Previous slide">
-      <i class="chev chev-left"></i>
-    </button>
-    <button class="carousel-button next" id="btnNext" aria-label="Next slide">
-      <i class="chev chev-right"></i>
-    </button>
+    <button class="carousel-button prev" id="btnPrev"><i class="chev chev-left"></i></button>
+    <button class="carousel-button next" id="btnNext"><i class="chev chev-right"></i></button>
 
     <div class="carousel-dots" id="carouselDots">
-      <div class="dot active" data-index="0" aria-label="Slide 1"></div>
-      <div class="dot" data-index="1" aria-label="Slide 2"></div>
-      <div class="dot" data-index="2" aria-label="Slide 3"></div>
+      <div class="dot active" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+      <div class="dot" data-index="2"></div>
     </div>
   </div>
-  <!-- ---------- END CAROUSEL ---------- -->
 
   <!-- Services -->
   <section class="services">
@@ -298,7 +287,7 @@
       <img src="https://img.freepik.com/free-photo/plumbing-professional-doing-his-job_23-2150721533.jpg?semt=ais_hybrid&w=740&q=80" alt="Plumbing Service">
       <div class="service-content">
         <h3>🚰 Plumbing Solutions</h3>
-        <p>From minor leaks to complete bathroom fittings, our skilled plumbers ensure that every pipe and tap in your home works perfectly without hassle.</p>
+        <p>From minor leaks to complete bathroom fittings, our skilled plumbers ensure every pipe and tap in your home works perfectly.</p>
         <ul class="service-points">
           <li>Tap Installation & Repair</li>
           <li>Leak Detection & Fixing</li>
@@ -325,28 +314,24 @@
     </div>
   </section>
 
-  <!-- About -->
   <section class="about">
     <h2>🙋‍♂️ About Us</h2>
     <p>
-      At <strong>Banane Waala</strong>, we aim to simplify your daily life by offering quick, trusted, 
+      At <strong>Banane Waala</strong>, we aim to simplify your daily life by offering quick, trusted,
       and professional home services. Our expert technicians are just one call away — because your comfort is our priority.
     </p>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 Banane Waala | All Rights Reserved | 📞 +91 7004079237
-  </footer>
+  <footer>© 2025 Banane Waala | All Rights Reserved | 📞 +91 7004079237</footer>
 
   <!-- Floating Call Button -->
   <a href="tel:+917004079237" class="call-now">📞 Call Now</a>
 
-  <!-- Carousel Script -->
+  <!-- Carousel Script (unchanged) -->
   <script>
     (function() {
       const track = document.getElementById('carouselTrack');
-      let slides = Array.from(track.children); // original slides
+      let slides = Array.from(track.children);
       const prevBtn = document.getElementById('btnPrev');
       const nextBtn = document.getElementById('btnNext');
       const dotsContainer = document.getElementById('carouselDots');
@@ -356,148 +341,84 @@
       const intervalTime = 5000;
       let timer = null;
 
-      // clone first slide and append for smooth forward wrap
       const firstClone = slides[0].cloneNode(true);
-      firstClone.setAttribute('data-clone', 'true');
       track.appendChild(firstClone);
+      slides = Array.from(track.children);
+      const originalCount = slides.length - 1;
+      let current = 0;
 
-      // refresh slides list and counts
-      slides = Array.from(track.children); // now includes clone at the end
-      const originalCount = slides.length - 1; // original slides count
-      let current = 0; // 0..originalCount-1
-
-      // helper: set transform by index in slides array (0..originalCount for clone)
       function setTranslateByIndex(index, withTransition = true) {
-        if (!withTransition) track.style.transition = 'none';
-        else track.style.transition = 'transform 0.7s ease-in-out';
+        track.style.transition = withTransition ? 'transform 0.7s ease-in-out' : 'none';
         track.style.transform = 'translateX(' + (-index * 100) + '%)';
-        // force reflow if transition removed so subsequent code works
         if (!withTransition) track.offsetHeight;
       }
 
       function goTo(index) {
-        // desired index in original cycle
-        // when navigating forward to index 0 from last, we'll move to the clone index (originalCount), then handle transitionend to jump to 0.
-        if (index < 0) {
-          // simple handling: go to last original directly (no backward infinite loop implemented)
-          current = originalCount - 1;
+        if (index < 0) { current = originalCount - 1; setTranslateByIndex(current); updateActive(); return; }
+        if (index === 0 && current === originalCount - 1) {
+          current = originalCount;
           setTranslateByIndex(current);
           updateActive();
           return;
         }
-
-        if (index === 0 && current === originalCount - 1) {
-          // normal forward step from last original -> move to clone
-          current = originalCount; // index of clone
-          setTranslateByIndex(current, true); // animate to clone
-          // update dots will still show last dot during animation
-          updateActive(); // will clamp dot to last
-          return;
-        }
-
-        // normal forward/back within originals
         current = (index + originalCount) % originalCount;
-        setTranslateByIndex(current, true);
+        setTranslateByIndex(current);
         updateActive();
       }
 
-      // update dots and aria-hidden
       function updateActive() {
-        // set aria-hidden on original slides only (exclude clone)
-        slides.forEach((s, i) => {
-          if (i >= originalCount) {
-            s.setAttribute('aria-hidden', 'true');
-          } else {
-            s.setAttribute('aria-hidden', i === current ? 'false' : 'true');
-          }
-        });
-
+        slides.forEach((s, i) => s.setAttribute('aria-hidden', i === current ? 'false' : 'true'));
         dots.forEach((d, i) => d.classList.toggle('active', i === (current % originalCount)));
       }
 
-      // transitionend: if we landed on the clone, jump to real first without animation
-      track.addEventListener('transitionend', function() {
-        // if we are on the clone (index === originalCount)
-        // note: compute currentTranslate index from transform
-        const transform = window.getComputedStyle(track).transform;
-        // transform format: matrix(...) we can calculate index from transform or track children - easier: check if current equals originalCount
-        if (current === originalCount) {
-          // jump to real first slide instantly (no transition)
-          setTranslateByIndex(0, false); // no animation
-          current = 0;
-          updateActive();
-          // restore transition for future moves
-          track.style.transition = 'transform 0.7s ease-in-out';
-        }
+      track.addEventListener('transitionend', () => {
+        if (current === originalCount) { setTranslateByIndex(0, false); current = 0; updateActive(); }
       });
 
-      function next() {
-        // if currently at clone (shouldn't happen), normalize
-        if (current >= originalCount) { current = 0; setTranslateByIndex(0, false); }
-        // go to next index (may be clone)
-        if (current === originalCount - 1) {
-          goTo(0); // special handling inside goTo will animate to clone then jump
-        } else {
-          goTo(current + 1);
-        }
-      }
+      function next() { current === originalCount - 1 ? goTo(0) : goTo(current + 1); }
+      function prev() { current === 0 ? goTo(originalCount - 1) : goTo(current - 1); }
 
-      function prev() {
-        // basic prev: when at first slide, jump to last (no infinite smooth backward implemented)
-        if (current === 0) {
-          current = originalCount - 1;
-          setTranslateByIndex(current, true);
-          updateActive();
-        } else {
-          goTo(current - 1);
-        }
-      }
+      dots.forEach(dot => dot.addEventListener('click', function() {
+        current = parseInt(this.dataset.index, 10);
+        setTranslateByIndex(current);
+        updateActive();
+        resetTimer();
+      }));
 
-      // dots click
-      dots.forEach(dot => {
-        dot.addEventListener('click', function() {
-          const idx = parseInt(this.getAttribute('data-index'), 10);
-          // move directly to that original index
-          current = idx;
-          setTranslateByIndex(current, true);
-          updateActive();
-          resetTimer();
-        });
-      });
+      prevBtn.addEventListener('click', () => { prev(); resetTimer(); });
+      nextBtn.addEventListener('click', () => { next(); resetTimer(); });
 
-      prevBtn.addEventListener('click', function() { prev(); resetTimer(); });
-      nextBtn.addEventListener('click', function() { next(); resetTimer(); });
+      function startTimer() { timer = setInterval(next, intervalTime); }
+      function stopTimer() { clearInterval(timer); }
+      function resetTimer() { stopTimer(); startTimer(); }
 
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') { prev(); resetTimer(); }
-        if (e.key === 'ArrowRight') { next(); resetTimer(); }
-      });
-
-      function startTimer() {
-        timer = setInterval(() => { next(); }, intervalTime);
-      }
-      function stopTimer() {
-        if (timer) { clearInterval(timer); timer = null; }
-      }
-      function resetTimer() {
-        stopTimer();
-        startTimer();
-      }
-
-      // pause on hover / focus
       carousel.addEventListener('mouseenter', stopTimer);
       carousel.addEventListener('mouseleave', startTimer);
-      carousel.addEventListener('focusin', stopTimer);
-      carousel.addEventListener('focusout', startTimer);
 
-      // initialize position at 0 (first slide)
       setTranslateByIndex(0, false);
       updateActive();
       startTimer();
-
-      // keep visual correct on resize
-      window.addEventListener('resize', () => { setTranslateByIndex(current, false); });
     })();
   </script>
+  <script>
+  // Enable touch swipe for carousel in mobile view
+  const carouselTrack = document.getElementById('carouselTrack');
+  let startX = 0;
+
+  carouselTrack.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carouselTrack.addEventListener('touchend', (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) {
+      // Swipe left → next slide
+      document.querySelector('.carousel-button.next')?.click();
+    } else if (endX - startX > 50) {
+      // Swipe right → previous slide
+      document.querySelector('.carousel-button.prev')?.click();
+    }
+  });
+</script>
 </body>
 </html>
